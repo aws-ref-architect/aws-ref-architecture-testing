@@ -10,11 +10,15 @@ Hosting notes:
 Terraform notes:
 - Local state initially, then S3/DynamoDB.
 - List of assets:
-  - S3 bucket (`risc-zero-game`)
-  - CloudFront CDN distribution (`risc-zero-game`)
+  - S3 bucket (`production-risc-zero-game`)
+  - CloudFront CDN distribution (`production-risc-zero-game`)
   - WAF (`production-risc-zero-game-whitelist-ips`)
   - S3 bucket for Terraform state (`risc-zero-game-tf`)
   - DynamoDB table (`risc-zero-game-tf`)
+
+Extras:
+- Logging/dashboard
+- Staging/Production versions for entire stack
 
 ## Setup Instructions
 
