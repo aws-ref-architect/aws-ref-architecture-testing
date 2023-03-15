@@ -1,6 +1,6 @@
 resource "aws_wafv2_web_acl" "game_bucket_privacy" {
-  name        = "game_bucket_privacy"
-  scope       = "REGIONAL"
+  name  = "game_bucket_privacy"
+  scope = "REGIONAL"
 
   default_action {
     block {}
@@ -44,7 +44,7 @@ resource "aws_wafv2_ip_set" "ip_whitelist" {
 
 resource "aws_cloudfront_distribution" "game_distribution" {
   origin {
-    domain_name              = aws_s3_bucket.${var.bucket_name}.bucket_regional_domain_name
+    domain_name              = aws_s3_bucket.var.bucket_name.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.default.id
     origin_id                = local.s3_origin_id
   }
@@ -58,3 +58,4 @@ resource "aws_cloudfront_distribution" "game_distribution" {
     bucket          = aws_s3_bucket.log_bucket.id
     prefix          = "waf"
   }
+}
