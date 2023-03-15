@@ -8,6 +8,6 @@
 # }
 
 resource "aws_vpc" "vpc" {
-  cidr_block           = "10.0.0.0/8"
-  instance_tenancy     = "default"
+  cidr_block       = "10.0.0.0/8"
+  instance_tenancy = "default"
 }
