@@ -11,16 +11,32 @@ resource "aws_s3_bucket" "this" {
   }
 }
 
-resource "aws_s3_bucket_acl" "this" {
+resource "aws_s3_bucket_policy" "allow_access_from_account" {
   bucket = aws_s3_bucket.this.id
-  
-  access_control_policy {
-    grant {
-      grantee {
-        id   = data.aws_canonical_user_id.current.id
-        type = "CanonicalUser"
-      }
-      permission = "READ"
+  policy = data.aws_iam_policy_document.allow_access_from_account.json
+}
+
+data "aws_iam_policy_document" "allow_access_from_account" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["123456789012"]
     }
+
+    actions = [
+      "s3:DeleteObject",
+      "s3:DeleteObjectVersion",
+      "s3:DeleteObjectVersionTagging",
+      "s3:GetBucketVersioning",
+      "s3:GetBucketWebsite",
+      "s3:GetObject",
+      "s3:ListBucket",
+      "s3:ListBucketVersions",
+    ]
+
+    resources = [
+      aws_s3_bucket.this.arn,
+      "${aws_s3_bucket.this.arn}/*",
+    ]
   }
 }
