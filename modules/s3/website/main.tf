@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "this" {
-  bucket = var.bucket_name
+  bucket = "${var.bucket_name}"
 
   versioning {
     enabled = true
@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "allow_access_from_account" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = ["123456789012"]
+      identifiers = ["${var.aws_account_id}"]
     }
 
     actions = [
