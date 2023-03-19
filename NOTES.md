@@ -3,9 +3,8 @@
 Hosting notes:
 - S3 bucket with CloudFront CDN possibly cheapest/simplest approach: Simple yet infinitely scalable.
   - Caveats: Need to ensure access from single specified IP (and one other IP to test).
-    - Use Web Application Firewall (WAF) to restrict access to CloudFront Distribution.
-- Add `index.html` to Terraform as @file.
-  - OPTIONAL: Add trigger from GitHub actions to run `terraform plan && terraform apply` on each commit to `master`.
+    - Use Web Application Firewall (WAF) to restrict access to CloudFront Distribution and S3 bucket.
+- Add `index.html` to Terraform as @file. Modification triggers redeploy of file only.
 
 Terraform notes:
 - Local state initially, then S3/DynamoDB.
